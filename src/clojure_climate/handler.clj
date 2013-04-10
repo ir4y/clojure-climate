@@ -2,19 +2,18 @@
   (:use compojure.core)
   (:require [compojure.handler :as handler]
             [compojure.route :as route]
-            [kibit.check :refer [check-expr]]))
+            [kibit.check :refer :all]))
 
-(defn form [expr]
-  (str 
-    "<form method='POST'>
-    <input name='expr' value='" expr "'>
-    <input type='submit' value='submit'>"
-    (check-expr (read-string expr))
-    "</form>"))
 
+(raw-code-result [raw-code]
+                 "hello code")
+
+(link-result [link]
+                 "hello link")
 (defroutes app-routes
-  (GET "/" [] (form (str "()")))
-  (POST "/" [expr] (form expr))
+  (GET "/" [] (main))
+  (POST "/" [raw_code] (raw-code-result raw-code-result))
+  (POST "/" [github_link] (link-result github_link))
   (route/resources "/")
   (route/not-found "Not Found"))
 
