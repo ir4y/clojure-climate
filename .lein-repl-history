@@ -1,0 +1,10 @@
+(require java.io :as io)
+(require clojure.java.io :as io)
+(clojure.java.io/make-input-stream)
+(clojure.java.io/reader "https://raw.github.com/ir4y/clojure-climate/master/src/clojure_climate/handler.clj")
+(require kibit)
+(load kibit)
+(kibit0
+)
+(kibit)
+(load kibit)
