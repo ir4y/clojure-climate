@@ -9,6 +9,7 @@
 (defn main-page []
   (l/document main-html))
 
-(defn main-page-result [html-content]
+(defn main-page-result [kibit-result source-code]
   (l/document main-html
-              (l/id= "test_code_result") (l/content html-content)))
+              (l/id= "test_code_result") (l/content kibit-result)
+              (l/id= "raw_code_id") (l/content source-code)))
