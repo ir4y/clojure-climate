@@ -11,4 +11,5 @@
    {:dependencies [
                    [ring-mock "0.1.3"]
                    [lein-kibit "0.0.8"]
+                   [com.taoensso/carmine "1.6.0"]
                    ]}})
