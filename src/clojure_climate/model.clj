@@ -10,4 +10,6 @@
   (wcar (car/lrange "links" 0 -1)))
 
 (defn push_link [link]
+  (when (> (wcar (car/llen "links")) 40)
+        (wcar (car/rpop "links")))
   (wcar (car/lpush "links" link)))

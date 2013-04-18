@@ -16,7 +16,10 @@
   (l/class= "span6") (l/content (pr-str (:expr kibit)))
   (l/class= "span5") (l/content (pr-str (:alt kibit))))
 
-(defn get_link_tag [link] (l/node :li :content (l/node :a :attrs {:href link} :content link)))
+(defn file-from-link [link]
+  (last (clojure.string/split link #"/")))
+
+(defn get_link_tag [link] (l/node :li :content (l/node :a :attrs {:href link} :content (file-from-link link))))
 
 (defn main-page
   ([] (let [links (model/get_links)]
@@ -30,12 +33,10 @@
                                                  (get_link_tag link)))
                 (l/id= "test_code_result") (l/content error)))))
 
-
 (defn main-page-result [kibit-result source-code]
   (let [links (model/get_links)]
-  (l/document main-html
-              (l/id= "test_code_result") (l/content (concat [result-header] (for [kibit kibit-result]
-                                                                               (new-result-item kibit))))
-              (l/id= "raw_code_id") (l/content source-code)
-              (l/id= "nav_links") (l/content (for [link links]
-                                               (get_link_tag link))))))
+    (l/document main-html
+      (l/id= "test_code_result") (l/content result-header (for [kibit kibit-result] (new-result-item kibit)))
+      (l/id= "raw_code_id") (l/content source-code)
+      (l/id= "nav_links") (l/content (for [link links]
+                                         (get_link_tag link))))))
