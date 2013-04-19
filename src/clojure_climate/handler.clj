@@ -4,8 +4,7 @@
             [compojure.route :as route]
             [kibit.check :refer :all]
             [clojure-climate.view :as view]
-            [clojure-climate.model :as model]
-            [clojure-climate.utils :as utils]))
+            [clojure-climate.model :as model]))
 
 (defn link-result [link]
   (try
