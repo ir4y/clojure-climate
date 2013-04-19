@@ -9,11 +9,10 @@
 
 (defn link-result [link]
   (try
-    (let [link-reader  (clojure.java.io/reader link)
-          kibit-result (kibit.check/check-reader link-reader)
-          link-reader  (clojure.java.io/reader link)
-          source-code  (clojure.string/join "\n" (line-seq link-reader))
-          result-page  (view/main-page-result kibit-result source-code)]
+    (let [source (slurp link)
+          kibit-result (->> (java.io.StringReader. source)
+                             kibit.check/check-reader)
+          result-page  (view/main-page-result kibit-result source)]
       (model/push_link link)
       result-page)
  (catch Exception e (view/main-page (pr-str e)))))
